@@ -6,18 +6,15 @@
 
 char switch1_state,switch2_state,switch3_state,switch4_state;
 char switch_state_changed;
+switch_state = 0;
 
-void
-
-static char
-switch_update_interrupt_sense(){
+static char switch_update_interrupt_sense(){
   char p2val = P2IN;
   P2IES |= (p2val & SWITCHES);
   P2IES &= (p2val | ~SWITCHES);
   return p2val;
 }
-
-
+void
 switch_init(){
   P2REN |= SWITCHES;
   P2IE |= SWITCHES;
@@ -26,6 +23,12 @@ switch_init(){
   switch_update_interrupt_sense();
 }
 
-if(switch1_state){ //sets switch state to what was pressed
-  switch_state = 1;
- }
+void
+switch_interrupt_handler(){
+  char p2val = switch_update_interrupt_sense();
+  switch1_state = (p2val & SW1) ? 0 : 1;
+
+  if(switch1_state){ //sets switch state to what was pressed
+    switch_state = 1;
+  }
+}

@@ -14,7 +14,7 @@ all: fireworks.elf
 
 
 
-fireworks.elf: ${COMMON_OBJECTS} main.c stateMachines.o switches.o buzzer.o ../lib/libTimer.a
+fireworks.elf: ${COMMON_OBJECTS} main.c stateMachines.o switches.o buzzer.o p2_interrupt_handler.c  ../lib/libTimer.a
 	${CC} ${CFLAGS} ${LDFLAGS} -o $@ $^
 
 
