@@ -1,6 +1,6 @@
 #ifndef switches_included
-
 #define switches_included
+#include "stateMachines.h"
 
 
 
@@ -15,4 +15,5 @@ void switch_interrupt_handler();
 
 extern char switch1_state,switch2_state,switch3_state,switch4_state;
 extern char switch_state_changed;
+
 #endif
