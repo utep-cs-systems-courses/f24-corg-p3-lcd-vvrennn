@@ -9,3 +9,12 @@ void buzzer_init(){
   P2SEL |= BIT6;
   P2DIR = BIT6;
 }
+void buzzer_set_period(short cycles) /* buzzer clock = 2MHz.  (period of 1k results in 2kHz tone) */
+{
+  CCR0 = cycles;
+  CCR1 = cycles >> 1;/* one half cycle */
+}
+void buzzer_off(){
+  CCR0 = 0;
+  CCR1 = 0;
+}

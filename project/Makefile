@@ -14,13 +14,13 @@ all: fireworks.elf
 
 
 
-fireworks.elf: ${COMMON_OBJECTS} main.c stateMachines.o switches.o buzzer.o p2_interrupt_handler.c  ../lib/libTimer.a
+fireworks.elf: ${COMMON_OBJECTS} main.c wdInterruptHandler.o stateMachines.o switches.o buzzer.o p2_interrupt_handler.c  ../lib/libTimer.a
 	${CC} ${CFLAGS} ${LDFLAGS} -o $@ $^
 
 
 
 load: fireworks.elf
-	msp430loader.sh project.elf
+	msp430loader.sh fireworks.elf
 
 
 
