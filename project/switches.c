@@ -40,5 +40,5 @@ void switch_interrupt_handler(){
     switch_state = 3;
   if (switch4_state)
     switch_state = 4;
-  switch_state_changed = 1; //make sure to show a button was pressed
+  // switch_state_changed = 1; //make sure to show a button was pressed
 }
