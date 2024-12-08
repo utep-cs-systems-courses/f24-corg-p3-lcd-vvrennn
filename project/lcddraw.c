@@ -115,3 +115,43 @@ void drawRectOutline(u_char colMin, u_char rowMin, u_char width, u_char height,
   fillRectangle(colMin + width, rowMin, 1, height, colorBGR);
 }
 
+ void draw_spiral(int width, int height,int increment, u_int color_BGR){
+  int x = width / 2;   // Start at the center of the screen
+  int y = height / 2;  // Start at the center of the screen
+
+  int dx = 1, dy = 0;  // Initial direction (moving right)
+  int step = 1;        // Number of steps in the current direction
+  int steps_left = step;
+  int change_direction = 0; // Counter to track direction changes
+
+  for (int i = 0; i < width * height; i++) {
+    // Set the pixel at the current position
+    drawPixel(x, y, color_BGR);
+
+    // Move in the current direction
+    x += dx;
+    y += dy;
+
+    // Decrease steps left in the current direction
+    steps_left--;
+
+    // If steps are complete in the current direction, change direction
+    if (steps_left == 0) {
+      change_direction++;
+      if (change_direction % 2 == 0) {
+	step+=increment; // Increase step size every two turns
+      }
+      steps_left = step;
+
+      // Change direction: right -> down -> left ->
+      int temp = dx;
+      dx = -dy;
+      dy = temp;
+    }
+
+    // Stop if we go out of bounds (edge of the LCD)
+    if (x < 0 || x >= width || y < 0 || y >= height) {
+      break;
+    }
+  }
+ }
